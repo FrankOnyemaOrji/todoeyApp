@@ -2,19 +2,18 @@
 import 'package:todoapp/exports/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/screens/addtask.dart';
+import 'package:provider/provider.dart';
 
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (context) => AddTask());
+            context: context,
+            builder: (context) => AddTask(),
+          );
         },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
@@ -42,7 +41,7 @@ class TasksScreen extends StatelessWidget {
                   height: 10.0,
                 ),
                 const Text(
-                  'Todoey',
+                  'Todo',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 50.0,
@@ -50,7 +49,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '12 tasks',
+                  '${Provider.of<TaskData>(context).taskCount} tasks',
                   style: TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ],
@@ -58,6 +57,7 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -65,7 +65,7 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TaskLIst(),
+              child: TaskList(),
             ),
           )
         ],

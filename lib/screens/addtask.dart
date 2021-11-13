@@ -7,7 +7,6 @@ import 'package:todoapp/exports/exports.dart';
 class AddTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String? newTaskTitle;
     return Container(
       color: const Color(0xff757575),
       child: Container(
@@ -28,9 +27,8 @@ class AddTask extends StatelessWidget {
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
-              onChanged: (newText) {
-                newTaskTitle = newText;
-              },
+              onChanged:
+                  Provider.of<TaskData>(context, listen: false).onChanged,
             ),
             const SizedBox(
               height: 10,
@@ -38,8 +36,7 @@ class AddTask extends StatelessWidget {
             FlatButton(
                 color: Colors.lightBlueAccent,
                 onPressed: () {
-                  Provider.of<TaskData>(context, listen: false)
-                      .addTask(newTaskTitle.toString());
+                  Provider.of<TaskData>(context, listen: false).addTask();
                   Navigator.pop(context);
                 },
                 child: Text(
